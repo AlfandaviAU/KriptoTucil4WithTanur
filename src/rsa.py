@@ -9,7 +9,6 @@ def generateKunciDekripsi(p,q,e):
             break
     return d
 
-
 # generateKunciDekripsi(47,71,79)
 
 def olahPesanFromKalimat(pesan):
