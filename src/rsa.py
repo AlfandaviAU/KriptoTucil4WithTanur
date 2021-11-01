@@ -61,12 +61,12 @@ def decryptRSA(ciphertext,p,q,d):
             m_array.append(str(temp))
     return(m_array)
 
-temp = encryptRSA(olahPesanFromKalimat('HELLOALICE'),47,71,79)
-listToStr = ' '.join([str(elem) for elem in temp])
-temp2 = olahPesanToKalimat(decryptRSA(encryptRSA(olahPesanFromKalimat('HELLOALICE'),47,71,79),47,71,generateKunciDekripsi(47,71,79)))
-listToStr2 = ''.join([str(elem) for elem in temp2])
-print(listToStr)
-print(listToStr2)
+# temp = encryptRSA(olahPesanFromKalimat('HELLOALICE'),47,71,79)
+# listToStr = ' '.join([str(elem) for elem in temp])
+# temp2 = olahPesanToKalimat(decryptRSA(encryptRSA(olahPesanFromKalimat('HELLOALICE'),47,71,79),47,71,generateKunciDekripsi(47,71,79)))
+# listToStr2 = ''.join([str(elem) for elem in temp2])
+# print(listToStr)
+# print(listToStr2)
 # print(listToStr)
 # olahPesanToKalimat(olahPesanFromKalimat('HELLOALICE'))
 
