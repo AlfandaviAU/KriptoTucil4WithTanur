@@ -25,11 +25,24 @@
                                   <h4>ECC</h4>
                                   <form method="POST" action="/enc_ecc" class="form-diy" enctype="multipart/form-data">
                                     <div class="form-diy" style="font-size: 15px;line-height: 30px;font-weight: 300;color: #afafaf;">
-                                      <label for="data">Input Data</h5></label>
-                                      <br>
-                                        <input type="text" id="coef" name="coef" placeholder="input coef" required><br>
-                                        <input type="text" id="base" name="base" placeholder="input base" required><br>
-                                      <br>
+                                      <h5>Input Data</h5>
+
+                                      <label for="plainteks">a</label><br>
+                                      <input type="text" id="a" name="a"><br>
+                                      <label for="plainteks">b</label><br>
+                                      <input type="text" id="b" name="b"><br>
+                                      <label for="plainteks">p</label><br>
+                                      <input type="text" id="p" name="p"><br>
+                                      <label for="plainteks">base x</label><br>
+                                      <input type="text" id="basex" name="basex"><br>
+                                      <label for="plainteks">base y</label><br>
+                                      <input type="text" id="basey" name="basey"><br>
+
+                                      <label for="plainteks">public x</label><br>
+                                      <input type="text" id="pubx" name="pubx"><br>
+                                      <label for="plainteks">public y</label><br>
+                                      <input type="text" id="puby" name="puby"><br>
+
                                       <label for="plainteks">Plainteks</label><br>
                                       <input type="text" id="plainteks" name="plainteks"><br>
                                       <div class="buttonasu" style="padding-top: 20px">
@@ -40,13 +53,23 @@
                                   <h4>Ekstraksi</h4>
                                   <form method="POST" action="/dec_ecc" class="form-diy" enctype="multipart/form-data">
                                     <div class="form-diy" style="font-size: 15px;line-height: 30px;font-weight: 300;color: #afafaf;">
-                                      <label for="data">Input Data</h5></label>
-                                      <br>
-                                      <input type="text" id="coef" name="coef" placeholder="input coef" required><br>
-                                      <input type="text" id="base" name="base" placeholder="input base" required><br>
-                                      <br>
-                                      <label for="cipherteks">cipherteks</label><br>
-                                      <!-- cipherteks dalam tupple -->
+                                        <h5>Input Data</h5>
+
+                                        <label for="plainteks">a</label><br>
+                                        <input type="text" id="a" name="a"><br>
+                                        <label for="plainteks">b</label><br>
+                                        <input type="text" id="b" name="b"><br>
+                                        <label for="plainteks">p</label><br>
+                                        <input type="text" id="p" name="p"><br>
+                                        <label for="plainteks">base x</label><br>
+                                        <input type="text" id="basex" name="basex"><br>
+                                        <label for="plainteks">base y</label><br>
+                                        <input type="text" id="basey" name="basey"><br>
+
+                                        <label for="plainteks">private key</label><br>
+                                        <input type="text" id="prv_key" name="prv_key"><br>
+
+                                        <label for="plainteks">Cipherteks (dalam bentuk tuple python)</label><br>
                                       <input type="text" id="cipherteks" name="cipherteks"><br>
                                       <div class="buttonasu" style="padding-top: 20px">
                                         <input type="submit" value="Submit">

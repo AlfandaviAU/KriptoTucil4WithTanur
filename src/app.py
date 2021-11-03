@@ -5,6 +5,7 @@ from elGamal import *
 from paillier import *
 from ecc import *
 import sys, os
+import ast
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'password'
@@ -135,58 +136,42 @@ def page_ecc():
     request_method = request.method
     return render_template('ecc.html',request_method=request_method)
 
-# @app.route('/enc_stegano', methods=['GET', 'POST'])
-# def encode_stegano():
-#     srcfilename = request.files.get("cover-file").filename
+@app.route('/enc_ecc', methods=['GET', 'POST'])
+def enc_ecc():
+    request_method = request.method
+    a      = int(request.form.get("a"))
+    b      = int(request.form.get("b"))
+    p      = int(request.form.get("p"))
+    base_x = int(request.form.get("basex"))
+    base_y = int(request.form.get("basey"))
 
-#     filestream  = request.files.get("cover-file")
-#     outputfile  = "output/steg-" + srcfilename
-#     if request.form.get("key") == "":
-#         stegoKey = None
-#     else:
-#         stegoKey = request.form.get("key")
+    pub_x  = int(request.form.get("pubx"))
+    pub_y  = int(request.form.get("puby"))
 
-#     embedfilestream = request.files.get("embed-file")
-#     embeddedmsg     = embedfilestream.read()
+    pt     = request.form.get("plainteks")
 
-#     stegoEnc = request.form.get("metode-steg")
-#     if stegoEnc == "with-enc" and len(stegoKey) > 0:
-#         embeddedmsg = mod_rc4(embeddedmsg, stegoKey)
-#     stegEncoder = None
-#     if srcfilename.split(".")[1].lower() == "png":
-#         stegEncoder = StegPNG(filestream, outputfile)
-#     elif srcfilename.split(".")[1].lower() == "wav":
-#         stegEncoder = StegWAV(filestream, outputfile)
+    enc = ECEG((a, b, p), (base_x, base_y))
+    res = str(enc.encrypt(pt, (pub_x, pub_y)))
 
-#     stegEncoder.encode(embeddedmsg, stegoKey)
+    return render_template('ecc.html',request_method=request_method, res=res)
 
-#     return redirect('/stegano')
+@app.route('/dec_ecc', methods=['GET', 'POST'])
+def dec_ecc():
+    request_method = request.method
+    a      = int(request.form.get("a"))
+    b      = int(request.form.get("b"))
+    p      = int(request.form.get("p"))
+    base_x = int(request.form.get("basex"))
+    base_y = int(request.form.get("basey"))
 
-# @app.route('/dec_stegano', methods=['GET', 'POST'])
-# def decode_stegano():
-#     srcfilename = request.files.get("file").filename.split(".")
+    private_key = int(request.form.get("prv_key"))
 
-#     filestream  = request.files.get("file")
-#     outputfile  = "output/dec-" + srcfilename[0] + ".txt"
-#     if request.form.get("key") == "":
-#         stegoKey = None
-#     else:
-#         stegoKey = request.form.get("key")
-
-#     if srcfilename[1].lower() == "png":
-#         stegDecoder = StegPNG(filestream, outputfile)
-#     elif srcfilename[1].lower() == "wav":
-#         stegDecoder = StegWAV(filestream, outputfile)
-
-#     try:
-#         stegDecoder.decode()
-#     except:
-#         # Objek bukan stego object yang valid / lcg header salah
-#         # TODO : Handler ?
-#         pass
-
-#     return redirect('/stegano')
-
+    ct     = request.form.get("cipherteks")
+    ct     = ast.literal_eval(ct)
+    enc    = ECEG((a, b, p), (base_x, base_y))
+    res    = str(enc.decrypt(ct, private_key))
+    print(res, len(res))
+    return render_template('ecc.html', request_method=request_method, result=res)
 
 if __name__ == '__main__':
     app.run(debug=True)
