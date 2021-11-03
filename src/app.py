@@ -129,11 +129,11 @@ def dec_paillier():
     return render_template('pailier.html',request_method=request_method, res = res)
 
 
-
 @app.route('/ecc', methods=['GET', 'POST'])
 def page_ecc():
     request_method = request.method
     return render_template('ecc.html',request_method=request_method)
+
 
 @app.route('/enc_ecc', methods=['GET', 'POST'])
 def enc_ecc():
@@ -152,7 +152,7 @@ def enc_ecc():
     enc = ECEG((a, b, p), (base_x, base_y))
     res = str(enc.encrypt(pt, (pub_x, pub_y)))
 
-    return render_template('ecc.html',request_method=request_method, res=res)
+    return render_template('ecc.html',request_method=request_method, result=res)
 
 @app.route('/dec_ecc', methods=['GET', 'POST'])
 def dec_ecc():
@@ -171,6 +171,53 @@ def dec_ecc():
     res    = str(enc.decrypt(ct, private_key))
     print(res, len(res))
     return render_template('ecc.html', request_method=request_method, result=res)
+
+
+
+@app.route('/page_keygen', methods=['GET', 'POST'])
+def page_keygen():
+    request_method = request.method
+    return render_template('keygen.html',request_method=request_method)
+
+@app.route('/keygen_rsa', methods=['GET', 'POST'])
+def keygen_rsa():
+    request_method = request.method
+
+    result = generate_rsa_key()
+    return render_template('keygen.html',request_method=request_method, result=result)
+
+@app.route('/keygen_elgamal', methods=['GET', 'POST'])
+def keygen_elgamal():
+    request_method = request.method
+
+    result = elgamal_keygen()
+    return render_template('keygen.html',request_method=request_method, result=result)
+
+@app.route('/keygen_paillier', methods=['GET', 'POST'])
+def keygen_paillier():
+    request_method = request.method
+
+    result = paillier_keygen()
+    return render_template('keygen.html',request_method=request_method, result=result)
+
+@app.route('/keygen_ecc', methods=['GET', 'POST'])
+def keygen_ecc():
+    request_method = request.method
+    a      = int(request.form.get("a"))
+    b      = int(request.form.get("b"))
+    p      = int(request.form.get("p"))
+    base_x = int(request.form.get("basex"))
+    base_y = int(request.form.get("basey"))
+    enc    = ECEG((a, b, p), (base_x, base_y))
+
+    result = enc.generate_key()
+    return render_template('keygen.html',request_method=request_method, result=result)
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -46,6 +46,12 @@ class ECC:
             elif xp == xq:
                 # Edge case : Tangent but yp = 0
                 return CONSTANT_O
+            elif pointA == CONSTANT_O:
+                # Edge case : Adding O + B
+                return pointB
+            elif pointB == CONSTANT_O:
+                # Edge case : Adding A + O
+                return pointA
             else:
                 # General case
                 # P + Q = R

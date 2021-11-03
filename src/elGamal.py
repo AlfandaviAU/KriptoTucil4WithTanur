@@ -32,6 +32,37 @@
 # m = 2035
 # k = 1520
 
+import random
+
+def is_prime(p : int) -> bool:
+    primality = True
+    n = 2
+    while primality and n <= int(p**(0.5)):
+        if p % n == 0:
+            primality = False
+        n += 1
+    return primality
+
+def get_prime(upper_bound : int) -> int:
+    p = random.randint(2, upper_bound)
+    while not is_prime(p):
+        p = random.randint(2, upper_bound)
+    return p
+
+def gcd(a : int, b : int) -> int:
+    if b == 0:
+        return a
+    return gcd(b, a % b)
+
+def elgamal_keygen() -> dict:
+    p = get_prime(1 << 16)
+
+    g = random.randint(1, p - 1)
+    x = random.randint(1, p - 2)
+    y = pow(g, x, p)
+
+    return {'private' : (x, p), 'public' : (y, g, p)}
+
 def bangkitKunciElGamal(p,g,x):
     y = pow(g,x,p)
     key = {
