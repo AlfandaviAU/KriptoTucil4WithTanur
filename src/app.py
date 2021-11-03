@@ -61,10 +61,10 @@ def dec_rsa():
     request_method = request.method
     p   = int(request.form.get("p"))
     q   = int(request.form.get("q"))
-    e   = int(request.form.get("e"))
+    d   = int(request.form.get("e"))
     cipherteks2   = request.form.get("cipherteks")
     cipherteks = cipherteks2.split(" ")
-    res2 = decryptRSA(cipherteks,p,q,generateKunciDekripsi(47,71,79))
+    res2 = decryptRSA(cipherteks, p, q, d)
     res3 = (olahPesanToKalimat(res2))
     res = ''.join([str(elem) for elem in res3])
     return render_template('rsa.html',request_method=request_method, res = res.upper())
@@ -108,13 +108,25 @@ def page_paillier():
     request_method = request.method
     return render_template('pailier.html',request_method=request_method)
 
-# @app.route('/enc_paillier', methods=['GET', 'POST'])
-# def enc_paillier():
-#     request_method = request.method
-#     pt   = int(request.form.get("plainteks"))
-#     key = paillier_keygen()
-#     res = paillier_enc(pt,key["public"])
-#     return render_template('pailier.html',request_method=request_method, res = res)
+@app.route('/enc_paillier', methods=['GET', 'POST'])
+def enc_paillier():
+    request_method = request.method
+    pt  = int(request.form.get("plainteks"))
+    g   = int(request.form.get("g"))
+    n   = int(request.form.get("n"))
+
+    res = paillier_enc(pt, (g, n))
+    return render_template('pailier.html',request_method=request_method, res=res)
+
+@app.route('/dec_paillier', methods=['GET', 'POST'])
+def dec_paillier():
+    request_method = request.method
+    lam = int(request.form.get("lambda"))
+    mu  = int(request.form.get("mu"))
+    n   = int(request.form.get("n"))
+    ct  = int(request.form.get("cipherteks"))
+    res = paillier_dec(ct, n, (lam, mu))
+    return render_template('pailier.html',request_method=request_method, res = res)
 
 
 

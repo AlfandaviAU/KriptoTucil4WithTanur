@@ -50,8 +50,9 @@ def paillier_enc(pt : int, pb_key : (int, int)) -> int:
     while gcd(r, pb_key[1]) != 1:
         r = random.randint(1, pb_key[1] - 1)
 
-    ct = (pb_key[0]**pt) * (r**pb_key[1])
-    ct = ct % (pb_key[1]**2)
+    n  = pb_key[1]
+    ct = pow(pb_key[0], pt, n**2) * pow(r, pb_key[1], n**2)
+    ct = ct % (n**2)
     return ct
 
 def paillier_dec(ct : int, n : int, pr_key : (int, int)) -> int:
