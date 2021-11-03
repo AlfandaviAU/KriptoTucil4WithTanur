@@ -34,6 +34,8 @@ def olahPesanFromKalimat(pesan):
 def olahPesanToKalimat(array):
     res = []
     for i in range (len(array)):
+        if (len(array[i]) == 3):
+            array[i] = array[i][1:]
         res.append(chr(int(array[i][:2])+97))
         res.append(chr(int(array[i][2:])+97))
     return res
@@ -53,21 +55,29 @@ def decryptRSA(ciphertext,p,q,d):
     m_array = []
     n = p * q
     for i in range (len(ciphertext)):
-        temp = pow(int(ciphertext[i]), int(d), int(n))
-        if (temp < 1000):
-            temp2 = "0"+str(temp)
-            m_array.append(temp2)
-        else:
-            m_array.append(str(temp))
+        if (ciphertext[i] != ' '):
+            temp = pow(int(ciphertext[i]), int(d), int(n))
+            if (temp < 1000):
+                temp2 = "0"+str(temp)
+                m_array.append(temp2)
+            else:
+                m_array.append(str(temp))
     return(m_array)
 
 # temp = encryptRSA(olahPesanFromKalimat('HELLOALICE'),47,71,79)
+# print(temp)
 # listToStr = ' '.join([str(elem) for elem in temp])
-# temp2 = olahPesanToKalimat(decryptRSA(encryptRSA(olahPesanFromKalimat('HELLOALICE'),47,71,79),47,71,generateKunciDekripsi(47,71,79)))
+# temp2 = olahPesanToKalimat(decryptRSA("0328 0301 2653 2986 1164",47,71,generateKunciDekripsi(47,71,79)))
+# print(temp2)
 # listToStr2 = ''.join([str(elem) for elem in temp2])
-# print(listToStr)
+# # print(listToStr)
 # print(listToStr2)
 # print(listToStr)
-# olahPesanToKalimat(olahPesanFromKalimat('HELLOALICE'))
+# # olahPesanToKalimat(olahPesanFromKalimat('HELLOALICE'))
+# inputan = ("0328 0301 2653 2986 1164").split(" ")
+# ress = (decryptRSA(inputan,47,71,generateKunciDekripsi(47,71,79)))
 
-# print(decryptRSA(encryptRSA(olahPesanFromKalimat('HELLOALICE'),47,71,79),47,71,generateKunciDekripsi(47,71,79)))
+
+# te = (olahPesanToKalimat(ress))
+# res = ''.join([str(elem) for elem in te])
+# print(res.upper())

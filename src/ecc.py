@@ -134,12 +134,12 @@ class ECEG(ECC):
 # print(ecc_test.multiply((2, 4), 2))
 
 # ECEG test
-coef     = (-1, 188, 751)
-base     = (201, 5)
-ecc_test = ECEG(coef, base)
-# print(ecc_test.generate_key())
-# {'private': 473, 'public': (479, 355)}
-# {'private': 176, 'public': (603, 587)}
-print(ecc_test.encrypt("HEHEHAHA", (479, 355)))
-tpl = [((169, 132), (386, 679)), ((384, 306), (232, 701)), ((295, 110), (34, 633)), ((198, 322), (701, 548)), ((731, 529), (701, 203)), ((329, 382), (485, 13)), ((385, 328), (44, 439)), ((211, 731), (229, 115))]
-print(ecc_test.decrypt(tpl, 473))
+# coef     = (-1, 188, 751)
+# base     = (201, 5)
+# ecc_test = ECEG(coef, base)
+# # print(ecc_test.generate_key())
+# # {'private': 473, 'public': (479, 355)}
+# # {'private': 176, 'public': (603, 587)}
+# print(ecc_test.encrypt("HEHEHAHA", (479, 355)))
+# tpl = [((169, 132), (386, 679)), ((384, 306), (232, 701)), ((295, 110), (34, 633)), ((198, 322), (701, 548)), ((731, 529), (701, 203)), ((329, 382), (485, 13)), ((385, 328), (44, 439)), ((211, 731), (229, 115))]
+# print(ecc_test.decrypt(tpl, 473))

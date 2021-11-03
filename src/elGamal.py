@@ -42,7 +42,7 @@ def bangkitKunciElGamal(p,g,x):
 
 # print(bangkitKunciElGamal(p,g,x)["private"])
 
-def enkripsiElGamal(keyPublic,m,k):
+def enkripsiElGamal(p,g,x,keyPublic,m,k):
     p = keyPublic[2]
     g = keyPublic[1]
     y = keyPublic[0]
@@ -52,15 +52,16 @@ def enkripsiElGamal(keyPublic,m,k):
             b = y ** k * m % p
     return a,b
 
-kunci = bangkitKunciElGamal(p,g,x)
-ciphertext = enkripsiElGamal(kunci["public"],m,k)
+# kunci = bangkitKunciElGamal(p,g,x)
+# ciphertext = enkripsiElGamal(p,g,x,kunci["public"],m,k)
+# print(ciphertext)
 
-def dekripsiElGamal(ciphertext,keyPrivate):
-    a = ciphertext[0]
-    b = ciphertext[1]
+def dekripsiElGamal(p,g,x,ciphertext,keyPrivate):
+    a = int(ciphertext[0])
+    b = int(ciphertext[1])
     # untuk 1/a^x
     seperAx = pow(a,(p-1-x),p)
     m = b * seperAx % p
     return m
 
-# print(dekripsiElGamal(ciphertext,kunci["private"]))
+# print(dekripsiElGamal(p,g,x,['1430', ' 697'],kunci["private"]))

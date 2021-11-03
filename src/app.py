@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for
 from forms import Todo
 from rsa import *
 from elGamal import *
+from paillier import *
+from ecc import *
 import sys, os
 
 app = Flask(__name__)
@@ -32,7 +34,7 @@ def page_rsa():
     #         srctext = request.form.get("message")
     #         outputfile = "output/rc4-manual"
 
-    #     rckey   = request.form.get("key")
+
     #     if len(rckey) > 0:
     #         result  = mod_rc4(srctext, rckey)
 
@@ -42,26 +44,79 @@ def page_rsa():
     # return render_template('rc4.html',request_method=request_method, result=result)\
     return render_template('rsa.html',request_method=request_method)
 
+@app.route('/enc_rsa', methods=['GET', 'POST'])
+def enc_rsa():
+    request_method = request.method
+    p   = int(request.form.get("p"))
+    q   = int(request.form.get("q"))
+    e   = int(request.form.get("e"))
+    plainteks   = request.form.get("plainteks")
+    res2 = encryptRSA(olahPesanFromKalimat(plainteks),p,q,e)
+    print(res2)
+    res = ' '.join([str(elem) for elem in res2])
+    return render_template('rsa.html',request_method=request_method, res = res)
+
+@app.route('/dec_rsa', methods=['GET', 'POST'])
+def dec_rsa():
+    request_method = request.method
+    p   = int(request.form.get("p"))
+    q   = int(request.form.get("q"))
+    e   = int(request.form.get("e"))
+    cipherteks2   = request.form.get("cipherteks")
+    cipherteks = cipherteks2.split(" ")
+    res2 = decryptRSA(cipherteks,p,q,generateKunciDekripsi(47,71,79))
+    res3 = (olahPesanToKalimat(res2))
+    res = ''.join([str(elem) for elem in res3])
+    return render_template('rsa.html',request_method=request_method, res = res.upper())
+
 @app.route('/elgamal', methods=['GET', 'POST'])
 def page_elgamal():
     request_method = request.method
     return render_template('elGamal.html',request_method=request_method)
 
+@app.route('/enc_elGamal', methods=['GET', 'POST'])
+def enc_elGamal():
+    request_method = request.method
+    p   = int(request.form.get("p"))
+    g   = int(request.form.get("g"))
+    x   = int(request.form.get("x"))
+    k   = int(request.form.get("k"))
+    plainteks   = int(request.form.get("plainteks"))
+    publicKey = bangkitKunciElGamal(p,g,x)["public"]
+    res = enkripsiElGamal(p,g,x,publicKey,plainteks,k)
+    return render_template('elGamal.html',request_method=request_method, res = res)
+
+@app.route('/dec_elGamal', methods=['GET', 'POST'])
+def dec_elGamal():
+    request_method = request.method
+    p   = int(request.form.get("p"))
+    g   = int(request.form.get("g"))
+    x   = int(request.form.get("x"))
+    cipherteks   = (request.form.get("ciphertext"))
+    cipherteks = cipherteks.replace("(","")
+    cipherteks = cipherteks.replace(")","")
+    cipherteks = cipherteks.split(",")
+    privateKey = bangkitKunciElGamal(p,g,x)["private"]
+    # print(cipherteks)
+    res = dekripsiElGamal(p,g,x,cipherteks,privateKey)
+    # print(res)
+    return render_template('elGamal.html',request_method=request_method, res = res)
+
+
 @app.route('/paillier', methods=['GET', 'POST'])
 def page_paillier():
     request_method = request.method
-    # fidelity       = None
-
-    # if len(request.files) > 0:
-    #     cover = request.files.get("cover")
-    #     stego = request.files.get("stego")
-
-    #     if cover.filename.split(".")[1].lower() == "png":
-    #         fidelity = psnr(cover, stego)
-    #     elif cover.filename.split(".")[1].lower() == "wav":
-    #         fidelity = audiopsnr(cover, stego)
-
     return render_template('pailier.html',request_method=request_method)
+
+# @app.route('/enc_paillier', methods=['GET', 'POST'])
+# def enc_paillier():
+#     request_method = request.method
+#     pt   = int(request.form.get("plainteks"))
+#     key = paillier_keygen()
+#     res = paillier_enc(pt,key["public"])
+#     return render_template('pailier.html',request_method=request_method, res = res)
+
+
 
 @app.route('/ecc', methods=['GET', 'POST'])
 def page_ecc():

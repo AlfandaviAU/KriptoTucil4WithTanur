@@ -43,9 +43,9 @@
                                     <div class="form-diy" style="font-size: 15px;line-height: 30px;font-weight: 300;color: #afafaf;">
                                       <label for="data">Input Data</h5></label>
                                       <br>
-                                        <input type="text" id="p" name="p" placeholder="input p" required><br>
-                                        <input type="text" id="q" name="q" placeholder="input q" required><br>
-                                        <input type="text" id="e" name="e" placeholder="input e" required><br>
+                                        <input type="number" id="p" name="p" placeholder="input p" required><br>
+                                        <input type="number" id="q" name="q" placeholder="input q" required><br>
+                                        <input type="number" id="e" name="e" placeholder="input e" required><br>
                                       <br>
                                       <label for="cipherteks">cipherteks</label><br>
                                       <input type="text" id="cipherteks" name="cipherteks"><br>
@@ -55,10 +55,10 @@
                                     </div>
                                   </form>
                                   <br><br>
-                                  {% if result != "" %}
+                                  {% if res != "" %}
                                   <div>
                                       <h4>Hasil</h4>
-                                      <input type="text" value="{{result}}" readonly>
+                                      <input type="text" value="{{res}}" readonly>
                                   </div>
                                   {% endif %}
                                 </div>
