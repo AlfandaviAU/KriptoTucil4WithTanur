@@ -1,18 +1,44 @@
-def generateKunciDekripsi(p,q,e):
-    n = p * q
-    theta = (p-1)*(q-1)
-    d = 0
-    for k in range (1000):
-        d = (1 + k*theta) / e
-        # d = (1 + k * phi(n)) * pow(e, -1, phi(n))
-        if (d == round(d,0)):
-            break
-    return d
+import random
 
-# generateKunciDekripsi(47,71,79)
+def is_prime(p : int) -> bool:
+    primality = True
+    n = 2
+    while primality and n <= int(p**(0.5)):
+        if p % n == 0:
+            primality = False
+        n += 1
+    return primality
+
+def get_prime(upper_bound : int) -> int:
+    p = random.randint(2, upper_bound)
+    while not is_prime(p):
+        p = random.randint(2, upper_bound)
+    return p
+
+def gcd(a : int, b : int) -> int:
+    if b == 0:
+        return a
+    return gcd(b, a % b)
+
+def generate_rsa_key() -> dict:
+    p   = get_prime(1 << 31)
+    q   = get_prime(1 << 31)
+
+    n   = p * q
+    phi = (p - 1) * (q - 1)
+    e   = random.randint(2, phi)
+    while gcd(phi, e) != 1:
+        e   = random.randint(2, phi)
+
+    d   = pow(e, -1, phi)
+    return {'p' : p, 'q' : q, 'e' : e, 'd' : d}
+
+
 
 def olahPesanFromKalimat(pesan):
     pesan = pesan.strip()
+    while len(pesan) % 4 != 0:
+        pesan += "X"
     split_strings = [pesan[index : index + 4] for index in range(0, len(pesan), 4)]
     res = []
     for i in range (len(split_strings)):
@@ -39,10 +65,10 @@ def olahPesanToKalimat(array):
         res.append(chr(int(array[i][:2])+97))
         res.append(chr(int(array[i][2:])+97))
     return res
-def encryptRSA(pesan,p,q,e):
+
+def encryptRSA(pesan,n,e):
     m_array = []
-    n = p * q
-    for i in range (len(pesan)):
+    for i in range(len(pesan)):
         temp = pow(int(pesan[i]), int(e) ,int(n))
         if (temp < 1000):
             temp2 = "0"+str(temp)
@@ -51,9 +77,8 @@ def encryptRSA(pesan,p,q,e):
             m_array.append(str(temp))
     return(m_array)
 
-def decryptRSA(ciphertext,p,q,d):
+def decryptRSA(ciphertext,n,d):
     m_array = []
-    n = p * q
     for i in range (len(ciphertext)):
         if (ciphertext[i] != ' '):
             temp = pow(int(ciphertext[i]), int(d), int(n))

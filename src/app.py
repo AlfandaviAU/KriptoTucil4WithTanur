@@ -48,11 +48,10 @@ def page_rsa():
 @app.route('/enc_rsa', methods=['GET', 'POST'])
 def enc_rsa():
     request_method = request.method
-    p   = int(request.form.get("p"))
-    q   = int(request.form.get("q"))
+    n   = int(request.form.get("n"))
     e   = int(request.form.get("e"))
     plainteks   = request.form.get("plainteks")
-    res2 = encryptRSA(olahPesanFromKalimat(plainteks),p,q,e)
+    res2 = encryptRSA(olahPesanFromKalimat(plainteks),n,e)
     print(res2)
     res = ' '.join([str(elem) for elem in res2])
     return render_template('rsa.html',request_method=request_method, res = res)
@@ -60,12 +59,11 @@ def enc_rsa():
 @app.route('/dec_rsa', methods=['GET', 'POST'])
 def dec_rsa():
     request_method = request.method
-    p   = int(request.form.get("p"))
-    q   = int(request.form.get("q"))
-    d   = int(request.form.get("e"))
+    n   = int(request.form.get("n"))
+    d   = int(request.form.get("d"))
     cipherteks2   = request.form.get("cipherteks")
     cipherteks = cipherteks2.split(" ")
-    res2 = decryptRSA(cipherteks, p, q, d)
+    res2 = decryptRSA(cipherteks, n, d)
     res3 = (olahPesanToKalimat(res2))
     res = ''.join([str(elem) for elem in res3])
     return render_template('rsa.html',request_method=request_method, res = res.upper())
