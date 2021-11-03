@@ -22,22 +22,37 @@
                             <div class="row">
                               <div class="col-lg-6 align-self-center">
                                 <div class="left-text">
-                                  <h4>Modified RC4</h4>
-                                  <form method="POST" class="form-diy" enctype="multipart/form-data">
+                                  <h4>ECC</h4>
+                                  <form method="POST" action="/enc_ecc" class="form-diy" enctype="multipart/form-data">
                                     <div class="form-diy" style="font-size: 15px;line-height: 30px;font-weight: 300;color: #afafaf;">
-                                      <label for="file">Choose file to upload</label><br>
-                                      <input type="file" id="file" name="srcfile"><br>
-                                      <label for="message">Or input message to process</label><br>
-                                      <input type="text" id="message" name="message"><br>
-
-                                      <label for="key">Key</label><br>
-                                      <input type="text" id="key" name="key"><br>
+                                      <label for="data">Input Data</h5></label>
+                                      <br>
+                                        <input type="text" id="coef" name="coef" placeholder="input coef" required><br>
+                                        <input type="text" id="base" name="base" placeholder="input base" required><br>
+                                      <br>
+                                      <label for="plainteks">Plainteks</label><br>
+                                      <input type="text" id="plainteks" name="plainteks"><br>
                                       <div class="buttonasu" style="padding-top: 20px">
                                         <input type="submit" value="Submit">
                                       </div>
                                     </div>
                                   </form>
-
+                                  <h4>Ekstraksi</h4>
+                                  <form method="POST" action="/dec_ecc" class="form-diy" enctype="multipart/form-data">
+                                    <div class="form-diy" style="font-size: 15px;line-height: 30px;font-weight: 300;color: #afafaf;">
+                                      <label for="data">Input Data</h5></label>
+                                      <br>
+                                      <input type="text" id="coef" name="coef" placeholder="input coef" required><br>
+                                      <input type="text" id="base" name="base" placeholder="input base" required><br>
+                                      <br>
+                                      <label for="cipherteks">cipherteks</label><br>
+                                      <!-- cipherteks dalam tupple -->
+                                      <input type="text" id="cipherteks" name="cipherteks"><br>
+                                      <div class="buttonasu" style="padding-top: 20px">
+                                        <input type="submit" value="Submit">
+                                      </div>
+                                    </div>
+                                  </form>
                                   <br><br>
                                   {% if result != "" %}
                                   <div>

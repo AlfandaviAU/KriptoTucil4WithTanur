@@ -4,7 +4,7 @@ def generateKunciDekripsi(p,q,e):
     d = 0
     for k in range (1000):
         d = (1 + k*theta) / e
-
+        # d = (1 + k * phi(n)) * pow(e, -1, phi(n))
         if (d == round(d,0)):
             break
     return d

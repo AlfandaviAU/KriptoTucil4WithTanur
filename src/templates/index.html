@@ -15,29 +15,32 @@
               <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
                 <div class="row">
                   <div class="col-lg-12">
-                    <h6>Tucil 3 IF 4020</h6>
-                    <h2>Modifikasi RC4 dan Steganografi</h2>
-                    <p> 13519141 - Naufal Yahya Kurnianto<br>
-                        13519211 - Muhammad Alfandavi Aryo Utomo<br>
+                    <h6>Tucil 4 IF 4020</h6>
+                    <h2>Implementasi Algoritma RSA, ElGamal,Paillier, ECC</h2>
+                    <p>13519211 - Muhammad Alfandavi Aryo Utomo<br>
                         13519214 - Tanur Rizaldi Rahardjo<br>
                     </p>
 
                     <p>Program stream cipher yang memodifikasi RC4 (KSA/PRGA) sehingga bisa melakukan enkripsi dan dekripsi pada file atau input pengguna</p>
                     <p>
                         Spesifikasi program adalah sebagai berikut:<br>
-                        1. Program dapat menerima pesan berupa file sembarang (file text maupun file biner) atau
-                        pesan yang diketikkan dari papan-ketik. <br>
-                        2. Program dapat mengenkripsi plainteks dan mendekripsi cipherteks menjadi plainteks
-                        semula.<br>
-                        3. Untuk pesan berupa text, program dapat menampilkan plainteks dan cipherteks di layar.<br>
-                        4. Program dapat menyimpan cipherteks ke dalam file. <br>
-                        5. Kunci dimasukkan oleh pengguna. Panjang kunci bebas<br>
+                        1.Program terdiri dari: <br>
+                        a.pembangkitan kunci privat dan kunci publikKunci publik dan kunci privat dapat disimpan dalam file terpisah (misalnya *.pub dan *.pri)<br>
+                        b.Enkripsi/dekripsi fileMasukan: pesan, kunciprivat/publik (browingatau diketik nilai kuncinya)<br>
+                        2.Program memiliki editor tempat pengguna mengetikkan pesan atau meng-copy paste tekske editor tersebut. <br>
+                        3.Program dapatmengenkripsi plainteks dengan RSA, ElGamal, Paillier, ECC<br>
+                        4.Program dapat mendekripsi cipherteks dengan RSA, ElGamal, Paillier, ECC<br>
+                        5.Program menampilkan cipherteks di layer<br>
+
                     </p>
 
                   </div>
                   <div class="col-lg-12">
                     <div class="border-first-button scroll-to-section">
-                      <a href="{{ url_for('page_rc4') }}">Stream Cipher RC4</a>
+                      <a href="{{ url_for('page_rsa') }}">RSA</a>
+                      <a href="{{ url_for('page_elgamal') }}">ElGamal</a>
+                      <a href="{{ url_for('page_paillier') }}">Paillier</a>
+                      <a href="{{ url_for('page_ecc') }}">ECC</a>
                     </div>
                   </div>
                 </div>
@@ -45,51 +48,7 @@
             </div>
             <div class="col-lg-6">
               <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
-                <img src="{{url_for('static', filename='images/undraw_unlock_24mb.svg')}}" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="steg" class="about section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="about-left-image  wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
-                <img src="{{url_for('static', filename='images/undraw_treasure_of9i.svg')}}" alt="">
-              </div>
-            </div>
-            <div class="col-lg-6 align-self-center  wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
-              <div class="about-right-content">
-                <div class="section-heading">
-                  <h6>TUCIL 3 IF 4020</h6>
-                  <h4>Steganografi <em>Audio & Video</em></h4>
-                  <div class="line-dec"></div>
-                </div>
-                <p>Program Steganografi yang bertujuan untuk menyembunyikan pesan pada berkas multimedia (audio dan video)</p>
-                <p>
-                    Spesifkasi program:<br>
-                    1. Program menerima masukan berupa citra digital dengan format BMP atau PNG, berkas
-                    audio/video (pilih salah satu), nama file pesan, dan kunci stego (opsional, jika pengguna
-                    memilih untuk mengenkripsi pesan dan/atau jika memilih penyisipan secara acak).<br>
-                    2. Metode steganografi yang digunakan adalah metode LSB.<br>
-                    3. Pengguna dapat memilih apakah pesan dienkripsi atau tidak dienkripsi sebelum
-                    disisipkan.<br>
-                    4. Pesan disisipkan secara sekuensial pada pixel-pixel citra atau acak.<br>
-                    5. Untuk citra, hitung PSNR setelah penyisipan. Untuk audio/video, hitung pengukuran
-                    fidelity-nya (silakan cari rumus untuk menghitungnya).<br>
-                </p>
-                <div class="col-lg-12">
-                    <div class="border-first-button scroll-to-section">
-                      <a href="{{ url_for('page_stegano') }}">Steganografi</a>
-                    </div>
-                  </div>
-                </div>
+                <img src="{{url_for('static', filename='images/undraw_programmer_re_owql.svg')}}" alt="">
               </div>
             </div>
           </div>

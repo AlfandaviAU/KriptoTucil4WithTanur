@@ -22,30 +22,38 @@
                             <div class="row">
                               <div class="col-lg-6 align-self-center">
                                 <div class="left-text">
-                                  <h4>Fidelity Calculation</h4>
-                                  <form method="POST" action="#" class="form-diy" enctype="multipart/form-data">
+                                  <h4>RSA</h4>
+                                  <form method="POST" action="/enc_paillier" class="form-diy" enctype="multipart/form-data">
                                     <div class="form-diy" style="font-size: 15px;line-height: 30px;font-weight: 300;color: #afafaf;">
-                                        <label for="file">Cover file</label><br>
-                                        <input type="file" id="file" name="cover"><br><br>
-                                        <label for="file">Stego object</label><br>
-                                        <input type="file" id="file" name="stego"><br>
-
+                                      <label for="plainteks">Plainteks</label><br>
+                                      <input type="text" id="plainteks" name="plainteks"><br>
                                       <div class="buttonasu" style="padding-top: 20px">
-                                        <input type="submit" value="Calculate">
+                                        <input type="submit" value="Submit">
                                       </div>
                                     </div>
                                   </form>
+                                  <h4>Ekstraksi</h4>
+                                  <form method="POST" action="/dec_paillier" class="form-diy" enctype="multipart/form-data">
+                                    <div class="form-diy" style="font-size: 15px;line-height: 30px;font-weight: 300;color: #afafaf;">
+                                      <label for="cipherteks">cipherteks</label><br>
+                                      <input type="text" id="cipherteks" name="cipherteks"><br>
+                                      <div class="buttonasu" style="padding-top: 20px">
+                                        <input type="submit" value="Submit">
+                                      </div>
+                                    </div>
+                                  </form>
+                                  <br><br>
+                                  {% if result != "" %}
                                   <div>
-                                      {% if fidelity is not none %}
-                                      <br><br><h4>Hasil</h4>
-                                      {{fidelity}} dB
-                                      {% endif %}
+                                      <h4>Hasil</h4>
+                                      <input type="text" value="{{result}}" readonly>
                                   </div>
+                                  {% endif %}
                                 </div>
                               </div>
                               <div class="col-lg-6 align-self-center">
                                 <div class="right-image">
-                                  <img src="{{url_for('static', filename='images/undraw_certification_aif8.svg')}}" alt="">
+                                  <img src="{{url_for('static', filename='images/undraw_Lost_online_re_upmy.svg')}}" alt="">
                                 </div>
                               </div>
                             </div>

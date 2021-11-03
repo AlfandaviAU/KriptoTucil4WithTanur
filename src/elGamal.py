@@ -63,4 +63,4 @@ def dekripsiElGamal(ciphertext,keyPrivate):
     m = b * seperAx % p
     return m
 
-print(dekripsiElGamal(ciphertext,kunci["private"]))
+# print(dekripsiElGamal(ciphertext,kunci["private"]))
