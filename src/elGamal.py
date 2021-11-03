@@ -26,11 +26,11 @@
 # pakai x, (a^x)^-1 = a^(p-1-x) mod p
 # m = b/(a^x) mod p
 
-p = 2357
-g = 2
-x = 1751
-m = 2035
-k = 1520
+# p = 2357
+# g = 2
+# x = 1751
+# m = 2035
+# k = 1520
 
 def bangkitKunciElGamal(p,g,x):
     y = pow(g,x,p)
